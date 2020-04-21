@@ -5,6 +5,47 @@ function Seguro(marca, anio, tipo) {
   this.anio = anio;
   this.tipo = tipo;
 }
+Seguro.prototype.cotizarSeguro = function(){
+    /*
+     1 = americano 1.15
+     2 = asiatico 1.05
+     3 = europeo 1.35
+    */
+
+    let cantidad;
+    const base =2000;
+
+    switch(this.marca){
+      case '1':
+        cantidad = base * 1.15;
+        break;
+      case '2':
+        cantidad = base * 1.05;
+        break;
+      case '3':
+        cantidad = base * 1.35;
+        break;
+    }
+    
+    // Leer el año
+    const diferencia = new Date().getFullYear()-this.anio;
+    //Cada año de diferencia hay que reducir 3% el valor del seguro
+
+    cantidad -= ((diferencia *3)*cantidad) / 100;
+    /*
+    si el seguro es basico se multiplica 30% mas
+    si el seguro es completo se multiplica 50% mas
+    */
+   if(this.tipo ==='basico') {
+     cantidad *= 1.30;
+   }else{
+     cantidad *= 1.50;
+   }
+
+   return cantidad;
+
+    console.log(cantidad);
+}
 
 //todo lo que se muestra
 function Interfaz(){}
@@ -54,7 +95,9 @@ formulario.addEventListener('submit', function(e){
     interfaz.mostrarError('Faltan datos, revisa el formulario y prueba de nuevo', 'error')
   }else{
    // Instanciar seguro mostrar interfaz
-    console.log('Todo correcto');
+    const seguro = new Seguro(marcaSeleccionada, anioSeleccionado, tipo);
+   //Cotizar seguro
+   const cantidad = seguro.cotizarSeguro();
   }
   //console.log(tipoSeleccionado);
   //console.log(anioSeleccionado);
@@ -73,4 +116,4 @@ for(let i = max; i > min; i--){
   selectYear.appendChild(option); //Se agrega el "option" como hijo 
 }
 
-console.log(formulario);
+
