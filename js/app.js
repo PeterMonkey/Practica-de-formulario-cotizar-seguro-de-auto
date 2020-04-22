@@ -1,11 +1,12 @@
 //Cotizar constructor
 //constructor para seguro
-function Seguro(marca, anio, tipo) {
-  this.marca = marca;
-  this.anio = anio;
-  this.tipo = tipo;
-}
-Seguro.prototype.cotizarSeguro = function(){
+class Seguro {
+  constructor(marca, anio, tipo) {
+    this.marca = marca;
+    this.anio = anio;
+    this.tipo = tipo;
+  }
+  cotizarSeguro(){
     /*
      1 = americano 1.15
      2 = asiatico 1.05
@@ -43,15 +44,16 @@ Seguro.prototype.cotizarSeguro = function(){
    }
 
    return cantidad;
+ }
 
-    console.log(cantidad);
 }
+    
+
 
 //todo lo que se muestra
-function Interfaz(){}
-
-//Mensaje que se imprime en el html
-Interfaz.prototype.mostrarMensaje = function(mensaje, tipo) {
+class Interfaz{
+  //Mensaje que se imprime en el html
+mostrarMensaje(mensaje, tipo) {
   const div = document.createElement('div');
   
   if(tipo === 'error'){
@@ -66,10 +68,10 @@ Interfaz.prototype.mostrarMensaje = function(mensaje, tipo) {
   setTimeout(function(){
        document.querySelector('.mensaje').remove();
    }, 3000);
-}
+  } 
 
-//Imprime el resultado de la cotizacion
-Interfaz.prototype.mostrarResultado = function(seguro, total){
+  //Imprime el resultado de la cotizacion
+mostrarResultado(seguro, total){
   const resultado = document.getElementById('resultado');
   let marca;
   switch(seguro.marca){
@@ -104,6 +106,11 @@ Interfaz.prototype.mostrarResultado = function(seguro, total){
  
   
 }
+}
+
+
+
+
 
 
 // EventListener
